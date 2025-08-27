@@ -1,0 +1,30 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    nginx \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements and install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY . .
+
+# Copy nginx config
+COPY nginx_lunarv.conf /etc/nginx/sites-available/lunarv
+RUN ln -s /etc/nginx/sites-available/lunarv /etc/nginx/sites-enabled/
+RUN rm /etc/nginx/sites-enabled/default
+
+# Expose ports
+EXPOSE 80 8501
+
+# Start nginx and streamlit
+COPY start_services.sh /start_services.sh
+RUN chmod +x /start_services.sh
+CMD ["/start_services.sh"]
