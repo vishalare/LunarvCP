@@ -20,46 +20,118 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for better styling
+# Custom CSS for modern, clean styling
 st.markdown("""
 <style>
+    /* Modern, clean styling matching your website design */
     .main-header {
-        font-size: 3rem;
-        font-weight: bold;
+        font-size: 2.5rem;
+        font-weight: 600;
         text-align: center;
-        color: #1f77b4;
+        color: #212529;
         margin-bottom: 2rem;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
+    
     .metric-card {
-        background-color: #f8f9fa;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        border-left: 4px solid #1f77b4;
+        background-color: #ffffff;
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+        border: 1px solid #e9ecef;
         margin: 1rem 0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        transition: all 0.2s ease;
     }
+    
+    .metric-card:hover {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transform: translateY(-2px);
+    }
+    
     .success-message {
-        background-color: #d4edda;
-        color: #155724;
+        background-color: #d1ecf1;
+        color: #0c5460;
         padding: 1rem;
         border-radius: 0.5rem;
-        border: 1px solid #c3e6cb;
+        border: 1px solid #bee5eb;
+        border-left: 4px solid #17a2b8;
     }
+    
     .warning-message {
         background-color: #fff3cd;
         color: #856404;
         padding: 1rem;
         border-radius: 0.5rem;
         border: 1px solid #ffeaa7;
+        border-left: 4px solid #ffc107;
     }
+    
     .error-message {
         background-color: #f8d7da;
         color: #721c24;
         padding: 1rem;
         border-radius: 0.5rem;
         border: 1px solid #f5c6cb;
+        border-left: 4px solid #dc3545;
     }
+    
+    .upload-area {
+        border: 2px dashed #dee2e6;
+        border-radius: 0.75rem;
+        padding: 2rem;
+        text-align: center;
+        background-color: #f8f9fa;
+        transition: all 0.2s ease;
+        margin: 1rem 0;
+    }
+    
+    .upload-area:hover {
+        border-color: #007bff;
+        background-color: #f0f8ff;
+    }
+    
+    .nav-button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        display: inline-block;
+        margin: 0.25rem;
+    }
+    
+    .nav-button:hover {
+        background-color: #0056b3;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0,123,255,0.3);
+    }
+    
     .stProgress > div > div > div > div {
-        background-color: #1f77b4;
+        background-color: #007bff;
+    }
+    
+    .stButton > button {
+        border-radius: 0.5rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+    
+    .stButton > button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    
+    /* Hide Streamlit's default styling */
+    .stApp {
+        background-color: #ffffff;
+    }
+    
+    .main .block-container {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -277,7 +349,24 @@ def main():
         show_export_page()
 
 def show_home_page():
-    st.header("🏠 Welcome to Lunarv")
+    # Modern navigation header like your website
+    st.markdown("""
+    <div style="background: white; padding: 1rem 0; border-bottom: 1px solid #e9ecef; margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto;">
+            <div style="font-size: 1.5rem; font-weight: 600; color: #212529;">🌙 Lunarv</div>
+            <div style="display: flex; gap: 1rem;">
+                <a href="#" class="nav-button" style="background-color: #007bff; color: white; padding: 0.5rem 1rem; border-radius: 0.5rem; text-decoration: none;">Input</a>
+                <a href="#" class="nav-button" style="background-color: transparent; color: #6c757d; border: 1px solid #dee2e6;">Output</a>
+                <a href="#" class="nav-button" style="background-color: transparent; color: #6c757d; border: 1px solid #dee2e6;">History</a>
+                <a href="#" class="nav-button" style="background-color: transparent; color: #6c757d; border: 1px solid #dee2e6;">Help</a>
+                <span style="color: #6c757d; margin-left: 1rem;">❤️</span>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.header("🎯 AI-Powered Customer Churn Prediction")
+    st.markdown("### Transform your customer data into actionable retention insights")
     
     col1, col2 = st.columns([2, 1])
     
@@ -319,51 +408,61 @@ def show_home_page():
         fig = visualizer.create_performance_metrics_card(sample_metrics)
         st.plotly_chart(fig, use_container_width=True)
     
-    # Preview section
+    # Platform Preview with modern design
     st.markdown("---")
-    st.header("👀 Platform Preview")
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.markdown("### 📊 What You'll Get")
-        st.markdown("""
-        **Complete Churn Analysis:**
-        - Customer risk assessment
-        - Churn probability scores
-        - Feature importance ranking
-        - Performance metrics
-        - Actionable insights
-        """)
-        
-        st.markdown("### 🎯 Key Features")
-        st.markdown("""
-        - **Smart Column Detection**: Automatically finds customer ID and churn columns
-        - **Multiple ML Models**: Tests Random Forest, Gradient Boosting, and Logistic Regression
-        - **Real-time Analytics**: Instant insights and visualizations
-        - **Export Capabilities**: Download results in CSV or Excel format
-        """)
-    
-    with col2:
-        st.markdown("### 📈 Sample Dashboard")
-        
-        # Create a sample preview dashboard
-        sample_data = {
-            'Metric': ['Total Customers', 'Churn Rate', 'Model Accuracy', 'High Risk Customers'],
-            'Value': ['10,000', '15.2%', '94.8%', '1,247'],
-            'Status': ['✅', '⚠️', '🎯', '🚨']
-        }
-        
-        sample_df = pd.DataFrame(sample_data)
-        st.dataframe(sample_df, use_container_width=True)
-        
-        st.markdown("### 🔮 Prediction Example")
-        st.info("""
-        **Customer #12345:**
-        - Churn Probability: 78.5%
-        - Risk Level: High Risk
-        - Recommendation: Immediate retention action needed
-        """)
+    st.markdown("""
+    <div style="background: #f8f9fa; padding: 2rem; border-radius: 0.75rem; margin: 2rem 0;">
+        <h2 style="color: #212529; margin-bottom: 1.5rem;">👀 Platform Preview</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <div>
+                <h3 style="color: #495057; margin-bottom: 1rem;">📊 What You'll Get</h3>
+                <ul style="color: #6c757d; line-height: 1.6;">
+                    <li>Customer risk assessment</li>
+                    <li>Churn probability scores</li>
+                    <li>Feature importance ranking</li>
+                    <li>Performance metrics</li>
+                    <li>Actionable insights</li>
+                </ul>
+                
+                <h3 style="color: #495057; margin-top: 1.5rem; margin-bottom: 1rem;">🎯 Key Features</h3>
+                <ul style="color: #6c757d; line-height: 1.6;">
+                    <li><strong>Smart Column Detection</strong>: Automatically finds customer ID and churn columns</li>
+                    <li><strong>Multiple ML Models</strong>: Tests Random Forest, Gradient Boosting, and Logistic Regression</li>
+                    <li><strong>Real-time Analytics</strong>: Instant insights and visualizations</li>
+                    <li><strong>Export Capabilities</strong>: Download results in CSV or Excel format</li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 style="color: #495057; margin-bottom: 1rem;">📈 Sample Dashboard</h3>
+                <div style="background: white; padding: 1rem; border-radius: 0.5rem; border: 1px solid #e9ecef;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; text-align: center;">
+                        <div style="padding: 0.5rem; background: #e8f5e8; border-radius: 0.25rem;">
+                            <div style="font-size: 0.875rem; color: #6c757d;">Total Customers</div>
+                            <div style="font-weight: 600; color: #212529;">10,000</div>
+                        </div>
+                        <div style="padding: 0.5rem; background: #fff3cd; border-radius: 0.25rem;">
+                            <div style="font-size: 0.875rem; color: #6c757d;">Churn Rate</div>
+                            <div style="font-weight: 600; color: #212529;">15.2%</div>
+                        </div>
+                        <div style="padding: 0.5rem; background: #d1ecf1; border-radius: 0.25rem;">
+                            <div style="font-size: 0.875rem; color: #6c757d;">Accuracy</div>
+                            <div style="font-weight: 600; color: #212529;">94.8%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 style="color: #495057; margin-top: 1.5rem; margin-bottom: 1rem;">🔮 Prediction Example</h3>
+                <div style="background: #fff3cd; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #ffc107;">
+                    <strong>Customer #12345:</strong><br>
+                    • Churn Probability: 78.5%<br>
+                    • Risk Level: High Risk<br>
+                    • Recommendation: Immediate retention action needed
+                </div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     
     # Quick start section
     st.markdown("---")
@@ -386,19 +485,72 @@ def show_home_page():
         st.success("🎯 Navigating to Data Upload... Please use the sidebar to continue.")
 
 def show_data_upload_page():
+    # Modern navigation header
+    st.markdown("""
+    <div style="background: white; padding: 1rem 0; border-bottom: 1px solid #e9ecef; margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto;">
+            <div style="font-size: 1.5rem; font-weight: 600; color: #212529;">🌙 Lunarv</div>
+            <div style="display: flex; gap: 1rem;">
+                <a href="#" class="nav-button" style="background-color: #007bff; color: white; padding: 0.5rem 1rem; border-radius: 0.5rem; text-decoration: none;">Input</a>
+                <a href="#" class="nav-button" style="background-color: transparent; color: #6c757d; border: 1px solid #dee2e6;">Output</a>
+                <a href="#" class="nav-button" style="background-color: transparent; color: #6c757d; border: 1px solid #dee2e6;">History</a>
+                <a href="#" class="nav-button" style="background-color: transparent; color: #6c757d; border: 1px solid #dee2e6;">Help</a>
+                <span style="color: #6c757d; margin-left: 1rem;">❤️</span>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
     st.header("📁 Data Upload & Validation")
     
-    # File upload section
-    st.subheader("📤 Upload Your Data")
+    # Modern file upload section like your website
+    st.markdown("""
+    <div style="background: #f8f9fa; padding: 2rem; border-radius: 0.75rem; margin: 2rem 0;">
+        <h3 style="color: #212529; margin-bottom: 1.5rem;">📤 Upload Your Input File(s)</h3>
+        
+        <div style="border: 2px dashed #dee2e6; border-radius: 0.75rem; padding: 3rem 2rem; text-align: center; background: white; margin-bottom: 1.5rem;">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">☁️⬆️</div>
+            <div style="font-size: 1.25rem; font-weight: 500; color: #212529; margin-bottom: 0.5rem;">Upload Your Input File(s)</div>
+            <div style="color: #6c757d; margin-bottom: 1rem;">Supported: .csv, .xls, .xlsx</div>
+            <div style="color: #6c757d;">Max 20MB</div>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+            <button style="background: white; border: 1px solid #dee2e6; padding: 0.75rem; border-radius: 0.5rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; transition: all 0.2s ease;">
+                🔗 URL
+            </button>
+            <button style="background: white; border: 1px solid #dee2e6; padding: 0.75rem; border-radius: 0.5rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; transition: all 0.2s ease;">
+                ☁️ Drive
+            </button>
+            <button style="background: white; border: 1px solid #dee2e6; padding: 0.75rem; border-radius: 0.5rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; transition: all 0.2s ease;">
+                📦 Dropbox
+            </button>
+            <button style="background: white; border: 1px solid #dee2e6; padding: 0.75rem; border-radius: 0.5rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; transition: all 0.2s ease;">
+                ☁️ OneDrive
+            </button>
+            <button style="background: white; border: 1px solid #dee2e6; padding: 0.75rem; border-radius: 0.5rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; transition: all 0.2s ease;">
+                🐙 GitHub
+            </button>
+            <button style="background: white; border: 1px solid #dee2e6; padding: 0.75rem; border-radius: 0.5rem; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; transition: all 0.2s ease;">
+                ➕ More
+            </button>
+        </div>
+        
+        <div style="text-align: center;">
+            <button style="background: #007bff; color: white; border: none; padding: 1rem 2rem; border-radius: 0.5rem; font-weight: 500; cursor: pointer; transition: all 0.2s ease;">
+                📄 Load Sample Input Data
+            </button>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     
-    col1, col2 = st.columns([2, 1])
-    
-    with col1:
-        uploaded_file = st.file_uploader(
-            "Choose a file",
-            type=['csv', 'xlsx', 'xls'],
-            help="Upload your customer data file (CSV or Excel format)"
-        )
+    # Actual file uploader (hidden but functional)
+    uploaded_file = st.file_uploader(
+        "Choose a file",
+        type=['csv', 'xlsx', 'xls'],
+        help="Upload your customer data file (CSV or Excel format)",
+        label_visibility="collapsed"
+    )
         
         if uploaded_file is not None:
             # Validate file
